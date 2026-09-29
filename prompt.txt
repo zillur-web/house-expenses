@@ -1,0 +1,399 @@
+Create a complete modern web-based **Bazar, Member Account, Expense & Bill Management System** using **Laravel + MySQL + Bootstrap 5 / AdminLTE**.
+
+The software will replace an existing Excel-based accounting system. All calculations should be automated, and members should be able to log in and see their own balances, payments, bills, expenses, and reports.
+
+## User Roles
+
+### Admin
+Admin should have full control of the system.
+
+Admin can:
+- Create, edit, deactivate, and delete members
+- Manage member opening balances
+- Add deposits/payments received from members
+- Add daily/monthly expenses
+- Create and manage bills
+- Manage expense categories
+- Make adjustments
+- View all transactions
+- Generate reports
+- Print/download reports
+- Manage users and permissions
+- View dashboard summaries
+
+### Member
+Each member will have their own login.
+
+After login, a member can only see their own financial information.
+
+Member dashboard should show:
+- Current Balance
+- Total Deposit/Paid
+- Total Bill
+- Total Expense Share
+- Previous Due
+- Current Due
+- Advance Balance
+- Recent Transactions
+- Monthly Summary
+
+Members cannot modify accounting data.
+
+## Member Management
+
+Store:
+- Member ID
+- Name
+- Phone
+- Email
+- Address
+- Join Date
+- Opening Balance
+- Status
+- Login Password
+
+Member ID should be generated automatically.
+
+## Member Deposits / Collections
+
+Admin can record money received from members.
+
+Fields:
+- Member
+- Date
+- Amount
+- Payment Method
+- Reference/Transaction ID
+- Note
+- Received By
+
+Payment methods:
+- Cash
+- Bank
+- bKash
+- Nagad
+- Rocket
+- Other
+
+Every payment must automatically update the member ledger and balance.
+
+## Expense Management
+
+Admin can add all expenses.
+
+Fields:
+- Date
+- Expense Category
+- Description
+- Amount
+- Paid By
+- Payment Method
+- Voucher/Reference Number
+- Attachment
+- Note
+
+Expense categories can include:
+- Bazar
+- Electricity
+- Gas
+- Water
+- Internet
+- Rent
+- Maintenance
+- Cook
+- Cleaning
+- Transport
+- Other
+
+Admin must be able to create new expense categories.
+
+## Bazar Management
+
+Create a dedicated Bazar module.
+
+Fields:
+- Date
+- Bazar By
+- Shop/Market
+- Item
+- Quantity
+- Unit Price
+- Total Price
+- Note
+
+Allow multiple items under one Bazar entry.
+
+Automatically calculate:
+
+Item Total = Quantity × Unit Price
+
+Bazar Total = Sum of all item totals
+
+Show daily and monthly Bazar reports.
+
+## Bill Management
+
+Admin can create monthly bills for members.
+
+Example:
+- Month
+- Member
+- Previous Due
+- Monthly Charge
+- Expense Share
+- Other Charge
+- Discount/Adjustment
+- Total Bill
+- Paid Amount
+- Due Amount
+
+Calculation:
+
+Total Bill = Previous Due + Monthly Charge + Expense Share + Other Charge - Discount
+
+Due Amount = Total Bill - Paid Amount
+
+If payment is higher than the bill, show the remaining amount as Advance Balance.
+
+## Expense Sharing
+
+Provide an option to distribute expenses among members.
+
+Admin can choose:
+- Equal distribution
+- Selected members only
+- Custom amount
+- Custom percentage
+
+Example:
+
+Total Expense = 30,000 BDT
+Active Members = 10
+
+Expense Per Member = 30,000 / 10 = 3,000 BDT
+
+The distributed amount should automatically appear in each member's ledger.
+
+## Member Ledger
+
+Maintain a complete ledger for every member.
+
+Columns:
+- Date
+- Description
+- Reference
+- Debit
+- Credit
+- Running Balance
+
+Every financial operation should automatically create the appropriate ledger entry.
+
+Do not manually store calculated balances where unnecessary. Maintain a proper transaction/ledger structure and calculate balances reliably from transactions.
+
+## Dashboard
+
+Create a modern responsive admin dashboard showing:
+
+- Total Members
+- Active Members
+- Total Collection
+- Total Expenses
+- Total Bazar Expense
+- Total Outstanding/Due
+- Total Advance
+- Current Cash/Balance
+- This Month Collection
+- This Month Expense
+
+Add charts for:
+- Monthly Income vs Expense
+- Monthly Collection
+- Expense by Category
+- Outstanding Member Bills
+
+## Reports
+
+Create filters by:
+- From Date
+- To Date
+- Month
+- Year
+- Member
+- Expense Category
+- Payment Method
+
+Reports:
+1. Member Statement
+2. Member Balance Report
+3. Collection Report
+4. Expense Report
+5. Bazar Report
+6. Monthly Bill Report
+7. Due Report
+8. Advance Report
+9. Income vs Expense Report
+10. Monthly Summary
+11. Expense Category Report
+12. Cash/Account Statement
+
+Reports should support:
+- Print
+- PDF
+- Excel export
+
+## Monthly Closing
+
+Create a monthly closing system.
+
+At the end of each month:
+- Calculate total collection
+- Calculate total expenses
+- Calculate each member's bill
+- Calculate paid amount
+- Calculate due/advance
+- Carry outstanding balance to next month
+
+Once a month is closed, normal users should not be able to modify its transactions.
+
+Admin can reopen a closed month with proper authorization and an audit log.
+
+## Audit Log
+
+Keep a record of important actions:
+
+- Created by
+- Updated by
+- Deleted by
+- Date/time
+- Old value
+- New value
+- IP address where appropriate
+
+Financial records should preferably use soft deletes instead of permanent deletion.
+
+## Authentication & Security
+
+Use Laravel authentication.
+
+Implement:
+- Admin login
+- Member login
+- Role-based permissions
+- Password hashing
+- CSRF protection
+- Form validation
+- Authorization policies/middleware
+- Secure file uploads
+- Database transactions for financial operations
+
+A member must NEVER be able to access another member's financial information by changing IDs or URLs.
+
+## Database Design
+
+Create a normalized MySQL database with appropriate tables such as:
+
+- users
+- members
+- payments
+- expense_categories
+- expenses
+- bazars
+- bazar_items
+- bills
+- bill_items
+- member_ledgers
+- expense_distributions
+- monthly_closings
+- adjustments
+- audit_logs
+
+Add proper:
+- Foreign keys
+- Indexes
+- Unique constraints
+- Soft deletes
+- Timestamps
+
+## UI/UX
+
+Use a clean professional accounting dashboard.
+
+Requirements:
+- Fully responsive
+- Desktop/mobile friendly
+- Sidebar navigation
+- Dashboard cards
+- Searchable tables
+- Pagination
+- Date picker
+- Select2 where useful
+- Confirmation before delete
+- Toast notifications
+- Loading indicators
+- Validation error messages
+- BDT (৳) currency formatting
+
+## Excel Migration
+
+The existing Excel file contains the current accounting records.
+
+Create an Excel Import module that can migrate:
+- Members
+- Opening balances
+- Previous dues
+- Deposits
+- Expenses
+- Bills
+- Existing balances
+
+Before importing:
+1. Preview the Excel data.
+2. Validate every row.
+3. Show invalid/duplicate rows.
+4. Allow the admin to confirm the import.
+5. Prevent duplicate transactions.
+6. Keep an import history.
+
+The new software's calculations should reproduce the accounting logic of the existing Excel workbook, while using a proper database/ledger-based accounting structure.
+
+## Development Requirements
+
+Use:
+- Latest stable Laravel version compatible with the environment
+- PHP
+- MySQL
+- Blade
+- Bootstrap 5 / AdminLTE
+- JavaScript/jQuery where needed
+- Laravel Excel for Excel import/export
+- DOMPDF or equivalent for PDF reports
+- Spatie Laravel Permission for roles/permissions
+
+Follow:
+- MVC architecture
+- Service classes for accounting logic
+- Form Request validation
+- Database transactions
+- Reusable Blade components
+- Clean routes
+- Proper exception handling
+
+Create complete:
+- Migrations
+- Models
+- Relationships
+- Controllers
+- Services
+- Form Requests
+- Middleware/Policies
+- Routes
+- Blade views
+- Seeders
+- Authentication
+- Reports
+- Excel import/export
+- PDF generation
+
+Do not create only a demo UI. Build the system as a functional production-ready application.
+
+Most importantly, analyze the supplied **Bazar.xlsx** workbook first, including its sheets, columns, formulas, totals, balances, dues, expenses, and calculation rules. Use those rules as the source of truth when designing the database and accounting calculations.

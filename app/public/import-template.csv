@@ -1,0 +1,2 @@
+type,date,member_code,amount,description,payment_method,category,direction
+payment,2026-09-28,REPLACE_WITH_MEMBER_CODE,1000,Monthly deposit,Cash,,credit

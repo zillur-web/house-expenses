@@ -1,0 +1,1 @@
+const fs=require('fs');const p='app/app/Services/AccountingService.php';let s=fs.readFileSync(p,'utf8');s=s.replace("if($t->type==='bill'){DB::table('bills')->where('transaction_id',$t->id)->update(['month'=>'V'.str_pad((string)$t->id,6,'0',STR_PAD_LEFT)]);}",'');fs.writeFileSync(p,s);
